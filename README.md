@@ -1,5 +1,5 @@
 # MorseMIDI
-This project was writen in Pyhton with the libreries [Tkinter](https://docs.python.org/3/library/tkinter.html "Tkinter") and [MidiUtils](https://pypi.org/project/MIDIUtil/ "MidiUtils"). This project converts text to Morse code in MIDI format. These MIDI files can be used to embed morse code into your music.
+This project was writen in Pyhton with the libreries [Tkinter](https://docs.python.org/3/library/tkinter.html "Tkinter") and [MidiUtils](https://pypi.org/project/MIDIUtil/ "MidiUtils"). This project converts text to Morse code in MIDI format. These MIDI files can be used to embed morse code into your music. This project was inspired by the online page "[Morse Code: MIDI & Text Generator](http://www.robertecker.com/hp/research/morse-generator.php "Morse Code: MIDI & Text Generator")" by Robert Ecker.
 
 ![MorseMIDI](https://github.com/EdgarBarranco/MorseMIDI/blob/994c2d1308aed34ad646c660498f18f708a0debe/MorseMIDI.PNG)
 
