@@ -72,7 +72,7 @@ def english_morse(t):
 
 main = Tk()
 main.title("Morse Code to MIDI")
-main.iconbitmap('icon.ico') # icon for the window comment to build binary wit pyinstaller
+main.iconbitmap('icon.ico')     # icon for the window. Comment to build binary with pyinstaller
 main.geometry("600x400")
 main.resizable(FALSE, FALSE)
 
