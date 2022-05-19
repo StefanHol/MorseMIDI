@@ -2,9 +2,11 @@
 This project was writen in Pyhton using the libreries [Tkinter](https://docs.python.org/3/library/tkinter.html "Tkinter") and [MidiUtils](https://pypi.org/project/MIDIUtil/ "MidiUtils"). This project converts text to Morse code in MIDI format. These MIDI files can be used to embed morse code into your music. This project was inspired by the online page "[Morse Code: MIDI & Text Generator](http://www.robertecker.com/hp/research/morse-generator.php "Morse Code: MIDI & Text Generator")" by Robert Ecker.
 
 Windows UI:
+
 ![Windows UI](https://github.com/EdgarBarranco/MorseMIDI/blob/283d27e874fa85c489b1296c7b49ee7aa09c50d7/MorseMIDI.PNG "Windows 10 UI")
 
 Linux UI:
+
 ![Linux UI](https://github.com/EdgarBarranco/MorseMIDI/blob/45a64e4814d7321f0e4b856ce113beef9194daf2/images/linux-ui.png "Linux UI")
 
 International Morse Code encodes 26 letters, numbers from zero to nine, and a subset of special characters such as periods, comas, etc. An interval of silence equivalent to the length of the short signal is used to maintain the spacing between each dot or dash signal. An interval of silence equivalent to three short signals is used to maintain the spacing between each letter. Additionally, an interval of silence equivalent to seven short signals is used to maintain the spacing between each word. This encoding has been implemented using the UI.
