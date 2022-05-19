@@ -3,7 +3,7 @@ This project was writen in Pyhton using the libreries [Tkinter](https://docs.pyt
 
 Windows UI:
 
-![Windows UI](https://github.com/EdgarBarranco/MorseMIDI/blob/283d27e874fa85c489b1296c7b49ee7aa09c50d7/MorseMIDI.PNG "Windows 10 UI")
+![Windows UI](https://github.com/EdgarBarranco/MorseMIDI/blob/7e6d9649ec1b5a382322de3e2825918d4ce451e9/images/windows-ui.png "Windows 10 UI")
 
 Linux UI:
 
