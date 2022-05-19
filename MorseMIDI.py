@@ -121,14 +121,16 @@ gapWords = Scale(main, from_=0, to=9999, orient=HORIZONTAL, length=200)
 gapWords.grid(row=8, column=1)
 gapWords.set(406)
 
-Label(main, text="              Enter text to convert to Morse MIDI").grid(row=0, column=2, sticky=W)
-text = Text(main, width=25, height=17, wrap=WORD)
+Label(main, text="Enter text to convert to Morse MIDI").grid(row=0, column=2, sticky=W, columnspan=2, padx=20)
+
+text = Text(main, width=25, height=15, wrap=WORD)
 text.insert(END, "Hello from K2UN")
-text.place(x=370, y=40)
+text.grid(row=0, column=2, rowspan=8, sticky=W, columnspan=2, padx=20, pady=5)
+
 
 button = Button(main, text="Convert", command=lambda: morse_to_midi(text.get("1.0", "end-1c").upper(), vol.get(),
                 note.get(), bpmValue.get(), timeResolution.get(), dotLength.get(), dashLength.get(), gapMarks.get(),
                 gapLetters.get(), gapWords.get()))
-button.place(x=445, y=330)
+button.grid(row=7, column=2, sticky=W, padx=20, pady=5)
 
 main.mainloop()
