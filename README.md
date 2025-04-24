@@ -2,13 +2,13 @@
 
 This project is based on the fork of the GitHub project [EdgarBarranco/MorseMIDI](https://github.com/EdgarBarranco/MorseMIDI).
 
+This project was written in Python using the libraries [Tkinter](https://docs.python.org/3/library/tkinter.html) and [MIDIUtil](https://pypi.org/project/MIDIUtil/). MorseMIDI converts text to Morse code in MIDI format, allowing you to embed Morse code into your music. The inspiration for this project came from the online page "[Morse Code: MIDI & Text Generator](http://www.robertecker.com/hp/research/morse-generator.php)" by Robert Ecker.
+
 ## Modifications:
 - Changed GUI to Pygubu
 - Added functionality to store and load settings or restore to default
 - Edited MIDI code title
 - Output estimation of time ticks that are needed for the MIDI code
-
-This project was written in Python using the libraries [Tkinter](https://docs.python.org/3/library/tkinter.html) and [MIDIUtil](https://pypi.org/project/MIDIUtil/). MorseMIDI converts text to Morse code in MIDI format, allowing you to embed Morse code into your music. The inspiration for this project came from the online page "[Morse Code: MIDI & Text Generator](http://www.robertecker.com/hp/research/morse-generator.php)" by Robert Ecker.
 
 ## Create Virtualenvironment and install requirements
 
