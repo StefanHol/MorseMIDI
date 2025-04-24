@@ -6,34 +6,32 @@ This project is based on the fork of the GitHub project [EdgarBarranco/MorseMIDI
 - Changed GUI to Pygubu
 - Added functionality to store and load settings or restore to default
 - Edited MIDI code title
-- Output estimation of time ticks that are needed for the code
+- Output estimation of time ticks that are needed for the MIDI code
 
 This project was written in Python using the libraries [Tkinter](https://docs.python.org/3/library/tkinter.html) and [MIDIUtil](https://pypi.org/project/MIDIUtil/). MorseMIDI converts text to Morse code in MIDI format, allowing you to embed Morse code into your music. The inspiration for this project came from the online page "[Morse Code: MIDI & Text Generator](http://www.robertecker.com/hp/research/morse-generator.php)" by Robert Ecker.
 
-## Create Virtualenvironment
+## Create Virtualenvironment and install requirements
 
-Create the venv
+**Create the venv**
 ``` bash
 python -m venv venv
 ```
 
-Start on Windows
+**Start Virtualenvironment on Windows and install requirements**
 ``` bash
 venv\Scripts\activate
-```
-
-Start on Linux
-``` bash
-source ./venv/bin/activate
-```
-
-## Install & Run
-
-In most cases after installing the latest version of python, you will need to run: 
-``` bash
 pip3 install -r requirements.txt
 ```
 
+**Start Virtualenvironment on Linux and install requirements**
+``` bash
+source ./venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+## Run
+
+Be sure you have activated the venv or installed the packages then run
 ``` bash
 python MorseMIDI.py
 ```
