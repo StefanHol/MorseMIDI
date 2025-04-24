@@ -9,6 +9,13 @@ from Morse import morse_to_midi
 # from Morse import english_morse
 from Morse import calculate_details
 import json
+import os
+
+
+PROJECT_PATH = os.path.dirname(__file__)
+PROJECT_UI = os.path.join(PROJECT_PATH, "app.ui")
+
+__version__ = "0.1.0"
 
 
 def write_to_json(json_data):
@@ -48,9 +55,14 @@ def read_from_json():
 class MorseMIDI(MorseMIDIUI):
     def __init__(self, master=None):
         super().__init__(master)
+        print(f"Version: {__version__}")
         self.input_text = ""
         self.code_title_text = ""
         self.read_values()
+        ICON_FILE = os.path.join(PROJECT_PATH, 'icon.ico')
+        self.mainwindow.iconbitmap(ICON_FILE)
+
+        print(type(self.mainwindow.title(f"MorseMIDI 'Version: {__version__}'")))
 
     def read_values(self):
         input_text_entry = self.builder.get_object('Input_Text')
