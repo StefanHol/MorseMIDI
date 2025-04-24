@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.4" author="PygubuDesigner 0.41">
+  <project>
+    <settings>
+      <setting id="name">MorseMIDI</setting>
+      <setting id="description">MorseMIDI</setting>
+      <setting id="module_name">MorseMIDI</setting>
+      <setting id="template">application</setting>
+      <setting id="main_widget">MorseMIDI</setting>
+      <setting id="main_classname">MorseMIDI</setting>
+      <setting id="main_menu">menu1</setting>
+      <setting id="output_dir" />
+      <setting id="output_dir2" />
+      <setting id="import_tkvariables">True</setting>
+      <setting id="use_ttk_styledefinition_file">False</setting>
+      <setting id="use_i18n">False</setting>
+      <setting id="all_ids_attributes">False</setting>
+      <setting id="generate_code_onsave">True</setting>
+      <setting id="use_window_centering_code">False</setting>
+      <setting id="ttk_style_definition_file" />
+    </settings>
+    <customwidgets />
+  </project>
+  <object class="tk.Toplevel" id="MorseMIDI" named="True">
+    <property name="class_">MorseMIDI</property>
+    <property name="height">200</property>
+    <property name="minsize">840|330</property>
+    <property name="resizable">both</property>
+    <property name="title" translatable="yes">MorseMIDI</property>
+    <property name="width">200</property>
+    <child>
+      <object class="ttk.Frame" id="frame1">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="ipadx">5</property>
+          <property name="padx">5</property>
+          <property name="pady">5</property>
+          <property name="row">0</property>
+          <property name="sticky">ns</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property name="anchor">center</property>
+        </containerlayout>
+        <child>
+          <object class="ttk.Label" id="label1">
+            <property name="text" translatable="yes">Volume:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">0</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Volume" named="True">
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">100</property>
+            <property name="textvariable">int:volume</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label2">
+            <property name="text" translatable="yes">Note:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Note" named="True">
+            <property name="text" translatable="yes">80</property>
+            <property name="textvariable">double:note</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label3">
+            <property name="text" translatable="yes">BPM:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="BPM" named="True">
+            <property name="text" translatable="yes">120</property>
+            <property name="textvariable">double:bpm</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label5">
+            <property name="text" translatable="yes">Time Resolution:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">4</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Time_resolution" named="True">
+            <property name="text" translatable="yes">480</property>
+            <property name="textvariable">double:time_resolution</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label6">
+            <property name="text" translatable="yes">Dot length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">5</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Dot_len" named="True">
+            <property name="text" translatable="yes">110</property>
+            <property name="textvariable">double:dot_len</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label7">
+            <property name="text" translatable="yes">Dash length:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">6</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Dash_len" named="True">
+            <property name="text" translatable="yes">230</property>
+            <property name="textvariable">double:dash_len</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">6</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label8">
+            <property name="text" translatable="yes">Silence between marks:</property>
+            <property name="textvariable">string:mark_space</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">7</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Mark_space" named="True">
+            <property name="text" translatable="yes">10</property>
+            <property name="textvariable">double:mark_space</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">7</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label9">
+            <property name="text" translatable="yes">Silence between letters:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">8</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Letter_space" named="True">
+            <property name="text" translatable="yes">130</property>
+            <property name="textvariable">double:letter_space</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">8</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label10">
+            <property name="text" translatable="yes">Silence between words:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="row">9</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Word_space" named="True">
+            <property name="text" translatable="yes">250</property>
+            <property name="textvariable">double:word_space</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">9</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="frame3">
+        <layout manager="grid">
+          <property name="column">1</property>
+          <property name="ipadx">5</property>
+          <property name="padx">5</property>
+          <property name="row">0</property>
+          <property name="sticky">nsew</property>
+        </layout>
+        <containerlayout manager="grid">
+          <property name="anchor">center</property>
+        </containerlayout>
+        <child>
+          <object class="ttk.Label" id="label4">
+            <property name="text" translatable="yes">Text to convert to Morse MIDI</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Text" id="Input_Text" named="True">
+            <property name="height">3</property>
+            <property name="maxundo">100</property>
+            <property name="relief">ridge</property>
+            <property name="text" translatable="yes">Morse Code to MIDI</property>
+            <property name="width">50</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">1</property>
+              <property name="sticky">ew</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label11">
+            <property name="text" translatable="yes">MorseCode MIDI Title:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="Code_Title" named="True">
+            <property name="text" translatable="yes">MIDI Morse Code</property>
+            <property name="textvariable">string:code_title</property>
+            <property name="width">7</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">3</property>
+              <property name="sticky">ew</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button1">
+            <property name="command" type="command" cbtype="simple">convert</property>
+            <property name="text" translatable="yes">Convert &amp; Save</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="pady">3</property>
+              <property name="row">4</property>
+              <property name="sticky">ew</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button2">
+            <property name="command" type="command" cbtype="simple">Calc</property>
+            <property name="text" translatable="yes">Calc-Length</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">3</property>
+              <property name="pady">3</property>
+              <property name="row">5</property>
+              <property name="sticky">ew</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Text" id="Output_Text" named="True">
+            <property name="height">6</property>
+            <property name="relief">ridge</property>
+            <property name="width">75</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">6</property>
+              <property name="sticky">ew</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="tk.Menu" id="menu1">
+    <property name="tearoff">false</property>
+    <child>
+      <object class="tk.Menuitem.Submenu" id="File" named="True">
+        <property name="label" translatable="yes">File</property>
+        <property name="tearoff">false</property>
+        <child>
+          <object class="tk.Menuitem.Command" id="StoreToJSON" named="True">
+            <property name="command" type="command" cbtype="simple">store_to_json</property>
+            <property name="label" translatable="yes">Store to JSON</property>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Menuitem.Command" id="LoadFromJSON" named="True">
+            <property name="command" type="command" cbtype="simple">load_from_json</property>
+            <property name="label" translatable="yes">Load from JSON</property>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Menuitem.Separator" id="separator1" />
+        </child>
+        <child>
+          <object class="tk.Menuitem.Command" id="LoadDefault" named="True">
+            <property name="command" type="command" cbtype="simple">load_default</property>
+            <property name="label" translatable="yes">Load default values</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

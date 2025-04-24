@@ -1,136 +1,179 @@
+#!/usr/bin/python3
+# import pathlib
+# import tkinter as tk
+from tkinter import END
+# import pygubu
 from tkinter import filedialog
-from tkinter import *
-from midiutil import MIDIFile
+from MorseMIDIui import MorseMIDIUI
+from Morse import morse_to_midi
+# from Morse import english_morse
+from Morse import calculate_details
+import json
 
 
-def morse_to_midi(t, volume, n, bpm, tr, dot, dash, marks, letters, words):
-    # print(t, volume, note, bpm, tr, dot, dash, marks, letters, words)
-    t = t.replace('\n', " ")
-    morse = english_morse(t)
-    # print(morse)
-    total_time = 0
-    for i in morse:
-        if i == '.':
-            total_time += dot + marks
-        elif i == '-':
-            total_time += dash + marks
-        elif i == '|':
-            total_time += words
-        elif i == ' ':
-            total_time += letters
-    print(total_time)
-    my_midi = MIDIFile(1)
-    my_midi.addTempo(track=0, time=0, tempo=bpm)
-    my_midi.addTrackName(track=0, time=0, trackName="Morse Code")
-
-    time = 0
-    for i in morse:
-        if i == '.':
-            my_midi.addNote(track=0, channel=0, pitch=n, time=time, duration=(dot/tr), volume=volume)
-            time += (dot / tr) + (marks / tr)
-        elif i == '-':
-            my_midi.addNote(track=0, channel=0, pitch=n, time=time, duration=(dash/tr), volume=volume)
-            time += (dash / tr) + (marks / tr)
-        elif i == '|':
-            my_midi.addNote(track=0, channel=0, pitch=0, time=time, duration=(words/tr), volume=0)
-            time += (words / tr) - (marks / tr)
-        elif i == ' ':
-            my_midi.addNote(track=0, channel=0, pitch=0, time=time, duration=(letters/tr), volume=0)
-            time += (letters / tr) - (marks / tr)
-
-    file = filedialog.asksaveasfile(mode='wb', defaultextension=".mid", filetypes=[("Midi Files", "*.mid")],
-                                    initialfile="Morse_Code.mid")
-    if file is None:
+def write_to_json(json_data):
+    file_handler = filedialog.asksaveasfilename(defaultextension=".json",
+                                    filetypes=[("JSON files", "*.json"), ("All files", "*.*")],
+                                    initialfile="default_settings.json",
+                                    title="Store JSON-File")
+    print(f"selected file_handler to store: '{file_handler}'")
+    if file_handler is None:
+        print("abort storing")
         return
-    my_midi.writeFile(file)
+    if file_handler:
+        with open(file_handler, 'w') as file:
+            json.dump(json_data, file)
+    else:
+        print("No file selected.")
 
 
-def english_morse(t):
-    mcode = {
-            ' ': '/', 'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....',
-            'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.',
-            'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
-            'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
-            '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----', ', ': '--..--', '.': '.-.-.-',
-            '?': '..--..', '/': '-..-.', '-': '-....-', '(': '-.--.', ')': '-.--.-', '"': '.-..-.', '=': '-...-',
-            '+': '.-.-.', '@': '.--.-.', ':': '---...', ';': '-.-.-', '_': '..--.-', '$': '.-...', '!': '-.-.--',
-            '&': '.-...-', '%': '---..-', '#': '--.--', '*': '-..-.', '\'': '.----.', '\n': ''
-    }
-    divided = t.split(' ')
-    string = ''
-    for word in divided:
-        for letter in word:
-            if letter in mcode:
-                string += mcode[letter]
-                string += ' '
-            else:
-                string += '?'
-        string = string[:-1]
-        string += '|'
-    return string[:-1]
+def read_from_json():
+    json_data = {}
+    file_handler = filedialog.askopenfilename(defaultextension=".json",
+                                    filetypes=[("JSON files", "*.json"), ("All files", "*.*")],
+                                    title="Load JSON-File"
+                                    )
+    print(f"file_handler: '{file_handler}'")
+    if file_handler == "":
+        print("No file selected")
+        return
+    try:
+        with open(file_handler, 'r') as file:
+            json_data = json.load(file)
+    except FileNotFoundError:
+        pass
+    return json_data
 
 
-main = Tk()
-main.title("Morse Code to MIDI")
-# main.iconbitmap('icon.ico')     # icon for the window. Comment to build binary with pyinstaller
-main.geometry("600x400")
-main.resizable(FALSE, FALSE)
+class MorseMIDI(MorseMIDIUI):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.input_text = ""
+        self.code_title_text = ""
+        self.read_values()
 
-Label(main, text="Volume:").grid(row=0, column=0, sticky=W)
-vol = Scale(main, from_=0, to=127, orient=HORIZONTAL, length=200)
-vol.grid(row=0, column=1)
-vol.set(100)
+    def read_values(self):
+        input_text_entry = self.builder.get_object('Input_Text')
+        self.input_text = input_text_entry.get("1.0", 'end-1c').upper()
+        self.code_title_text = self.code_title.get()
+        
+        self.volume_value = int(self.volume.get())
+        self.note_value = int(self.note.get())
+        self.bpm_value = int(self.bpm.get())
+        self.time_resolution_value = int(self.time_resolution.get())
+        self.dot_len_value = int(self.dot_len.get())
+        self.dash_len_value = int(self.dash_len.get())
+        self.mark_space_value = int(self.mark_space.get())
+        self.letter_space_value = int(self.letter_space.get())
+        self.word_space_value = int(self.word_space.get())
+        
+        print("---- READ VALUES ----")
+        print(f'Input_Text: {self.input_text}')
+        print(f'code_title: {self.code_title_text}')
+                
+        print(f'volume_value: {self.volume_value}')
+        print(f'note_value: {self.note_value}')
+        print(f'bpm_value: {self.bpm_value}')
+        print(f'time_resolution_value: {self.time_resolution_value}')
+        print(f'dot_len_value: {self.dot_len_value}')
+        print(f'dash_len_value: {self.dash_len_value}')
+        print(f'mark_space_value: {self.mark_space_value}')
+        print(f'letter_space_value: {self.letter_space_value}')
+        print(f'word_space_value: {self.word_space_value}')
 
-Label(main, text="Note:").grid(row=1, column=0, sticky=W)
-note = Scale(main, from_=1, to=127, orient=HORIZONTAL, length=200)
-note.grid(row=1, column=1)
-note.set(80)
+    def convert(self):
+        '''convert Text to Morede Midi code and store to file
+        
+        '''
+        self.read_values()
+        morse_to_midi(
+                t=self.input_text,
+                volume=self.volume_value,
+                n=self.note_value,
+                bpm=self.bpm_value,
+                tr=self.time_resolution_value,
+                dot=self.dot_len_value,
+                dash=self.dash_len_value,
+                marks=self.mark_space_value,
+                letters=self.letter_space_value,
+                words=self.word_space_value,
+                track_name=self.code_title_text
+                )
 
-Label(main, text="BPM:").grid(row=2, column=0, sticky=W)
-bpmValue = Scale(main, from_=0, to=999, orient=HORIZONTAL, length=200)
-bpmValue.grid(row=2, column=1)
-bpmValue.set(120)
+    def Calc(self):
+        '''Calculate Morse MIDI Details
+        '''
+        self.read_values()
+        text_inhalt = calculate_details(dot_len=self.dot_len_value,
+                                       dash_len=self.dash_len_value,
+                                       mark_space=self.mark_space_value,
+                                       letter_space=self.letter_space_value,
+                                       word_space=self.word_space_value,
+                                       text_to_calc=self.input_text,
+                                       time_resolution=self.time_resolution_value)
 
-Label(main, text="Time Resolution:").grid(row=3, column=0, sticky=W)
-timeResolution = Scale(main, from_=0, to=9999, orient=HORIZONTAL, length=200)
-timeResolution.grid(row=3, column=1)
-timeResolution.set(480)
+        output_widget = self.builder.get_object('Output_Text')
+        output_widget.delete("1.0", END)
+        output_widget.insert("1.0", text_inhalt)
 
-Label(main, text="Dot length:").grid(row=4, column=0, sticky=W)
-dotLength = Scale(main, from_=0, to=9999, orient=HORIZONTAL, length=200)
-dotLength.grid(row=4, column=1)
-dotLength.set(58)
+    def store_to_json(self):
+        self.read_values()
+        json_data = {
+            "morse_input_text": self.input_text,
+            "code_title": self.code_title_text,
+            "volume_value": self.volume_value,
+            "note_value": self.note_value,
+            "bpm_value": self.bpm_value,
+            "time_resolution_value": self.time_resolution_value,
+            "dot_len_value": self.dot_len_value,
+            "dash_len_value": self.dash_len_value,
+            "mark_space_value": self.mark_space_value,
+            "letter_space_value": self.letter_space_value,
+            "word_space_value": self.word_space_value
+        }
+        write_to_json(json_data)
 
-Label(main, text="Dash length:").grid(row=5, column=0, sticky=W)
-dashLength = Scale(main, from_=0, to=9999, orient=HORIZONTAL, length=200)
-dashLength.grid(row=5, column=1)
-dashLength.set(174)
+    def load_from_json(self):
+        json_data = read_from_json()
+        print(f"json data: {json_data}")
+        if json_data is None:
+            print("nothing updated")
+            return
+        else:
+            input_text = json_data.get("morse_input_text", "MorseCode")
+            self.code_title.set(json_data.get('code_title', "Midi Morse Code Title"))
+            self.volume.set(json_data.get('volume_value', 100))
+            self.note.set(json_data.get('note_value', 80))
+            self.bpm.set(json_data.get('bpm_value', 120))
+            self.time_resolution.set(json_data.get('time_resolution_value', 480))
+            self.dot_len.set(json_data.get('dot_len_value', 110))
+            self.dash_len.set(json_data.get('dash_len_value', 230))
+            self.mark_space.set(json_data.get('mark_space_value', 10))
+            self.letter_space.set(json_data.get('letter_space_value', 130))
+            self.word_space.set(json_data.get('word_space_value', 250))
 
-Label(main, text="Silence between marks:", anchor="w").grid(row=6, column=0, sticky=W)
-gapMarks = Scale(main, from_=0, to=9999, orient=HORIZONTAL, length=200)
-gapMarks.grid(row=6, column=1)
-gapMarks.set(58)
+            output_widget = self.builder.get_object('Input_Text')
+            output_widget.delete("1.0", END)
+            output_widget.insert("1.0", input_text)
 
-Label(main, text="Silence between letters:").grid(row=7, column=0, sticky=W)
-gapLetters = Scale(main, from_=0, to=9999, orient=HORIZONTAL, length=200)
-gapLetters.grid(row=7, column=1)
-gapLetters.set(174)
+    def load_default(self):
+        input_text = "Morse code to MIDI"
+        self.code_title.set("MIDI Morse Code")
+        self.volume.set(100)
+        self.note.set(80)
+        self.bpm.set(120)
+        self.time_resolution.set(480)
+        self.dot_len.set(110)
+        self.dash_len.set(230)
+        self.mark_space.set(10)
+        self.letter_space.set(130)
+        self.word_space.set(250)
+        
+        output_widget = self.builder.get_object('Input_Text')
+        output_widget.delete("1.0", END)
+        output_widget.insert("1.0", input_text)
 
-Label(main, text="Silence between words:").grid(row=8, column=0, sticky=W)
-gapWords = Scale(main, from_=0, to=9999, orient=HORIZONTAL, length=200)
-gapWords.grid(row=8, column=1)
-gapWords.set(406)
 
-Label(main, text="Text to convert to Morse MIDI").grid(row=0, column=2, sticky=W, columnspan=2, padx=20)
-
-text = Text(main, width=25, height=15, wrap=WORD)
-text.insert(END, "Hello from K2UN")
-text.grid(row=0, column=2, rowspan=8, sticky=W, columnspan=2, padx=20, pady=0)
-
-
-button = Button(main, text="Convert", command=lambda: morse_to_midi(text.get("1.0", "end-1c").upper(), vol.get(),
-                note.get(), bpmValue.get(), timeResolution.get(), dotLength.get(), dashLength.get(), gapMarks.get(),
-                gapLetters.get(), gapWords.get()))
-button.grid(row=7, column=2, sticky=W, padx=20, pady=5)
-
-main.mainloop()
+if __name__ == "__main__":
+    app = MorseMIDI()
+    app.run()
