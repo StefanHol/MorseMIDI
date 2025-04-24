@@ -86,3 +86,16 @@ Linux UI:
 FL Studio:
 
 ![FL Studio](https://github.com/EdgarBarranco/MorseMIDI/blob/791d9e9acfa76f24ac5765676c5635ae1286b860/images/flstudi.png "Midi file in FL Studio")
+
+
+# Create executable for windows
+
+If you want to build an EXE-File for Windows
+
+1. Activate venv see above
+2. install pyinstaller
+    ```
+    pip install -r requirements_to_build.txt
+    ```
+3. ``build.bat`` will build the MorseMIDI.exe for you
+    - Output will be stored in ``dist\MorseMIDI`` folder
