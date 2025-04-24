@@ -24,6 +24,8 @@
   <object class="tk.Toplevel" id="MorseMIDI" named="True">
     <property name="class_">MorseMIDI</property>
     <property name="height">200</property>
+    <property name="iconbitmap">icon.png</property>
+    <property name="iconphoto">icon.png</property>
     <property name="minsize">840|330</property>
     <property name="resizable">both</property>
     <property name="title" translatable="yes">MorseMIDI</property>

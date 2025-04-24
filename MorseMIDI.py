@@ -59,9 +59,6 @@ class MorseMIDI(MorseMIDIUI):
         self.input_text = ""
         self.code_title_text = ""
         self.read_values()
-        ICON_FILE = os.path.join(PROJECT_PATH, 'icon.ico')
-        self.mainwindow.iconbitmap(ICON_FILE)
-
         print(type(self.mainwindow.title(f"MorseMIDI 'Version: {__version__}'")))
 
     def read_values(self):

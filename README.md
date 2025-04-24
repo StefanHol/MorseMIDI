@@ -31,10 +31,20 @@ pip3 install -r requirements.txt
 
 ## Run
 
-Be sure you have activated the venv or installed the packages then run
+Be sure you have activated the venv or installed the packages then run.
+
+Windows:
 ``` bash
+venv\Scripts\activate
 python MorseMIDI.py
 ```
+
+Linux
+``` bash
+source ./venv/bin/activate
+python3 MorseMIDI.py
+```
+
 
 # The Tool
 
@@ -79,13 +89,20 @@ Windows UI:
 
 Linux UI:
 
-![Linux UI](https://github.com/EdgarBarranco/MorseMIDI/blob/45a64e4814d7321f0e4b856ce113beef9194daf2/images/linux-ui.png "Linux UI")
+![Linux UI](https://github.com/StefanHol/MorseMIDI/blob/main/images/linux-ui.png "Linux UI")
 
 
-## Screenshots in Ableton and FL Studio:
-FL Studio:
+## Screenshots in Ardour and Bitwig Studio:
 
-![FL Studio](https://github.com/EdgarBarranco/MorseMIDI/blob/791d9e9acfa76f24ac5765676c5635ae1286b860/images/flstudi.png "Midi file in FL Studio")
+Ardour:
+
+![FL Studio](https://github.com/StefanHol/MorseMIDI/blob/main/images/ardour.png "Midi file in Ardour")
+
+Bitwig:
+
+![FL Studio](https://github.com/StefanHol/MorseMIDI/blob/main/images/bitwig.png "Midi file in Bitwig Studio")
+
+
 
 
 # Create executable for windows
