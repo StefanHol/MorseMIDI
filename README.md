@@ -106,14 +106,30 @@ Bitwig:
 
 
 
-# Create executable for windows
+# Create executable
+## For Windows
 
 If you want to build an EXE-File for Windows
 
-1. Activate venv see above
+1. Activate `venv` see above
 2. install pyinstaller
     ```
     pip install -r requirements_to_build.txt
     ```
 3. ``build.bat`` will build the MorseMIDI.exe for you
     - Output will be stored in ``dist\MorseMIDI`` folder
+
+
+## For Linux
+
+If you want to build an executable for Linux
+
+1. Activate `venv` see above
+2. install pyinstaller
+    ```
+    pip install -r requirements_to_build.txt
+    ```
+3. ``chmod +x ./build.sh``
+3. ``build.sh`` will build the MorseMIDI.exe for you
+    - Output will be stored in ``dist\MorseMIDI`` folder
+
