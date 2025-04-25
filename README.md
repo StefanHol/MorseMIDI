@@ -91,6 +91,8 @@ Linux UI:
 
 ![Linux UI](https://github.com/StefanHol/MorseMIDI/blob/main/images/linux-ui.png "Linux UI")
 
+![Linux UI darkly](https://github.com/StefanHol/MorseMIDI/blob/main/images/linux-ui_darkly_theme.png "Linux UI darkly")
+
 
 ## Screenshots in Ardour and Bitwig Studio:
 
