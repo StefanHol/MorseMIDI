@@ -130,6 +130,6 @@ If you want to build an executable for Linux
     pip install -r requirements_to_build.txt
     ```
 3. ``chmod +x ./build.sh``
-3. ``build.sh`` will build the executable ``MorseMIDI`` for you
+4. ``build.sh`` will build the executable ``MorseMIDI`` for you
     - Output will be stored in ``dist/MorseMIDI`` folder
 
