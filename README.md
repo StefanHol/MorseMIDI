@@ -131,5 +131,5 @@ If you want to build an executable for Linux
     ```
 3. ``chmod +x ./build.sh``
 3. ``build.sh`` will build the executable ``MorseMIDI`` for you
-    - Output will be stored in ``dist\MorseMIDI`` folder
+    - Output will be stored in ``dist/MorseMIDI`` folder
 
