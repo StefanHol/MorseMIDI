@@ -62,6 +62,9 @@ class MorseMIDIUI:
     def load_default(self):
         pass
 
+    def on_about_menu_clicked(self):
+        pass
+
 
 if __name__ == "__main__":
     app = MorseMIDIUI()

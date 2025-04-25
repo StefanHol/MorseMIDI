@@ -252,17 +252,8 @@
       </object>
     </child>
     <child>
-      <object class="ttk.Separator" id="separator2">
-        <property name="orient">horizontal</property>
-        <layout manager="grid">
-          <property name="column">1</property>
-          <property name="row">0</property>
-          <property name="sticky">ns</property>
-        </layout>
-      </object>
-    </child>
-    <child>
       <object class="ttk.Frame" id="frame3">
+        <property name="height">200</property>
         <layout manager="grid">
           <property name="column">2</property>
           <property name="ipadx">5</property>
@@ -278,8 +269,6 @@
         </containerlayout>
         <child>
           <object class="ttk.Frame" id="frame2">
-            <property name="height">200</property>
-            <property name="width">200</property>
             <layout manager="grid">
               <property name="column">0</property>
               <property name="row">0</property>
@@ -304,7 +293,6 @@
                 <property name="maxundo">100</property>
                 <property name="relief">ridge</property>
                 <property name="text" translatable="yes">Morse Code to MIDI</property>
-                <property name="width">50</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="pady">5</property>
@@ -317,8 +305,6 @@
         </child>
         <child>
           <object class="ttk.Frame" id="frame4">
-            <property name="height">200</property>
-            <property name="width">200</property>
             <layout manager="grid">
               <property name="column">0</property>
               <property name="row">1</property>
@@ -340,7 +326,6 @@
               <object class="ttk.Entry" id="Code_Title" named="True">
                 <property name="text" translatable="yes">MIDI Morse Code</property>
                 <property name="textvariable">string:code_title</property>
-                <property name="width">7</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="row">1</property>
@@ -361,6 +346,20 @@
                 </layout>
               </object>
             </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Frame" id="frame5">
+            <property name="height">200</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+              <property name="sticky">nsew</property>
+            </layout>
+            <containerlayout manager="grid">
+              <property type="col" id="0" name="weight">1</property>
+              <property type="row" id="1" name="weight">1</property>
+            </containerlayout>
             <child>
               <object class="ttk.Button" id="button2">
                 <property name="command" type="command" cbtype="simple">Calc</property>
@@ -369,35 +368,19 @@
                   <property name="column">0</property>
                   <property name="ipady">3</property>
                   <property name="pady">3</property>
-                  <property name="row">3</property>
+                  <property name="row">0</property>
                   <property name="sticky">ew</property>
                 </layout>
               </object>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="ttk.Frame" id="frame5">
-            <property name="height">200</property>
-            <property name="width">200</property>
-            <layout manager="grid">
-              <property name="column">0</property>
-              <property name="row">2</property>
-              <property name="sticky">nsew</property>
-            </layout>
-            <containerlayout manager="grid">
-              <property type="col" id="0" name="weight">1</property>
-              <property type="row" id="0" name="weight">1</property>
-            </containerlayout>
             <child>
               <object class="tk.Text" id="Output_Text" named="True">
                 <property name="height">6</property>
                 <property name="relief">ridge</property>
-                <property name="width">75</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="pady">5</property>
-                  <property name="row">0</property>
+                  <property name="row">1</property>
                   <property name="sticky">nsew</property>
                 </layout>
               </object>
@@ -432,6 +415,27 @@
           <object class="tk.Menuitem.Command" id="LoadDefault" named="True">
             <property name="command" type="command" cbtype="simple">load_default</property>
             <property name="label" translatable="yes">Load default values</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Menuitem.Submenu" id="Help" named="True">
+        <property name="label" translatable="yes">Help</property>
+        <property name="tearoff">false</property>
+        <child>
+          <object class="tk.Menuitem.Command" id="About" named="True">
+            <property name="command" type="command" cbtype="simple">on_about_menu_clicked</property>
+            <property name="label" translatable="yes">About</property>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Menuitem.Separator" id="separator2" />
+        </child>
+        <child>
+          <object class="tk.Menuitem.Submenu" id="Theme" named="True">
+            <property name="label" translatable="yes">Theme</property>
+            <property name="tearoff">false</property>
           </object>
         </child>
       </object>

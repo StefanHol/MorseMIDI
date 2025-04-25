@@ -1,21 +1,22 @@
 #!/usr/bin/python3
-# import pathlib
-# import tkinter as tk
 from tkinter import END
-# import pygubu
 from tkinter import filedialog
+from tkinter import Toplevel
+from tkinter.ttk import Label, Button
+from pygubu.theming.bootstrap.style import Style
 from MorseMIDIui import MorseMIDIUI
 from Morse import morse_to_midi
-# from Morse import english_morse
+
 from Morse import calculate_details
 import json
 import os
-
+import webbrowser
 
 PROJECT_PATH = os.path.dirname(__file__)
 PROJECT_UI = os.path.join(PROJECT_PATH, "app.ui")
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
+__author__ = "Stefan Hol."
 
 
 def write_to_json(json_data):
@@ -56,10 +57,75 @@ class MorseMIDI(MorseMIDIUI):
     def __init__(self, master=None):
         super().__init__(master)
         print(f"Version: {__version__}")
+        self.mainwindow.title(f"MorseMIDI 'Version: {__version__}'")
         self.input_text = ""
         self.code_title_text = ""
         self.read_values()
-        print(type(self.mainwindow.title(f"MorseMIDI 'Version: {__version__}'")))
+
+        # s = Style(master)
+        # for name in s.theme_names():
+        #     print(f"s.theme_use('{name}')")
+        self._create_theme_menu()
+
+    def set_theme(self, theme_name):
+        """Activate Bootstrap-Theme."""
+        s = Style(self.mainwindow)
+        try:
+            s.theme_use(theme_name)
+            print(f"Theme activated: {theme_name}")
+        except Exception as e:
+            print(f"Error while try to activate theme '{theme_name}': {e}")
+
+    def _create_theme_menu(self):
+        """Create Theme-Menu entry dynamcaly."""
+        menubar = self.builder.get_object("menu1")  # Main menu ID
+        theme_menu = self.builder.get_object("Theme")  # Submenu "Theme" ID
+
+        if menubar and theme_menu:
+            s = Style(self.mainwindow)
+            for name in s.theme_names():
+                command = lambda theme_name=name: self.set_theme(theme_name)
+                theme_menu.add_command(label=name, command=command)
+        else:
+            print("Error: Menu or 'Theme'-submenu not found.")
+
+    def open_link(self, event):
+        """Open project URL in default browser."""
+        webbrowser.open_new("https://github.com/StefanHol/MorseMIDI")
+
+    def on_about_menu_clicked(self):
+        """Show 'About'-Popup window."""
+        about_window = Toplevel(self.mainwindow)
+        about_window.title("About MorseMIDI")  # Passen Sie den Titel an
+
+        about_text = f"""
+        MorseMIDI Version: {__version__}
+
+        Text to MorseCode MIDI converter.
+
+        Copyright 2025: {__author__}
+        Based on https://github.com/EdgarBarranco/MorseMIDI
+
+        GUI: TkInter/pygubu with pygubu-designer
+        Thanks to JobinPy @ Youtube, alejandroautalan @ GitHub
+        """
+
+        about_label = Label(about_window, text=about_text, padding=10)
+        about_label.pack()
+
+        link_label = Label(about_window, text="GitHub StefanHol/MorseMIDI", cursor="hand2", foreground="blue")
+        link_label.pack(pady=5)
+        link_label.bind("<Button-1>", self.open_link)
+
+        close_button = Button(about_window, text="Close", command=about_window.destroy)
+        close_button.pack(pady=10)
+
+        about_window.grab_set()
+        about_window.focus_set()
+        about_window.resizable(False, False)
+
+        # wail until window is closed
+        about_window.wait_window()
 
     def read_values(self):
         input_text_entry = self.builder.get_object('Input_Text')
