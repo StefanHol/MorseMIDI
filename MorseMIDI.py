@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from tkinter import END
 from tkinter import filedialog
+from tkinter import messagebox
 from tkinter import Toplevel
 from tkinter.ttk import Label, Button
 from pygubu.theming.bootstrap.style import Style
@@ -14,8 +15,9 @@ import webbrowser
 
 PROJECT_PATH = os.path.dirname(__file__)
 PROJECT_UI = os.path.join(PROJECT_PATH, "app.ui")
+LICENSE_FILE = "LICENSE"
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "Stefan Hol."
 
 
@@ -93,10 +95,27 @@ class MorseMIDI(MorseMIDIUI):
         """Open project URL in default browser."""
         webbrowser.open_new("https://github.com/StefanHol/MorseMIDI")
 
+    # def open_license_file(self):
+    #     """Open LICENSE file."""
+    #     license_path = os.path.join(PROJECT_PATH, LICENSE_FILE)
+    #     if os.path.exists(license_path):
+    #         try:
+    #             if os.name == 'nt':  # Windows
+    #                 os.startfile(license_path)
+    #             elif os.name == 'posix':  # Linux und macOS
+    #                 import subprocess
+    #                 subprocess.run(['open', license_path], check=False)
+    #         except Exception as e:
+    #             print(f"Error open license not possible: {e}")
+    #             messagebox.showerror("Fehler", f"Licence File could not be opend.")
+    #     else:
+    #         messagebox.showerror("Error", f"License file '{LICENSE_FILE}' not found.")
+
     def on_about_menu_clicked(self):
         """Show 'About'-Popup window."""
         about_window = Toplevel(self.mainwindow)
-        about_window.title("About MorseMIDI")  # Passen Sie den Titel an
+        about_window.title("About MorseMIDI")
+        license_path = os.path.join(PROJECT_PATH, LICENSE_FILE)
 
         about_text = f"""
         MorseMIDI Version: {__version__}
@@ -107,7 +126,10 @@ class MorseMIDI(MorseMIDIUI):
         Based on https://github.com/EdgarBarranco/MorseMIDI
 
         GUI: TkInter/pygubu with pygubu-designer
-        Thanks to JobinPy @ Youtube, alejandroautalan @ GitHub
+        Thanks to 'JobinPy' @ Youtube, 'alejandroautalan' @ GitHub
+
+        License: Apache License, Version 2.0.
+        License path: '{license_path}'
         """
 
         about_label = Label(about_window, text=about_text, padding=10)
@@ -117,8 +139,11 @@ class MorseMIDI(MorseMIDIUI):
         link_label.pack(pady=5)
         link_label.bind("<Button-1>", self.open_link)
 
+        # open_license_button = ttk.Button(about_window, text="Show LICENSE file", command=self.open_license_file)
+        # open_license_button.pack(pady=5)
+
         close_button = Button(about_window, text="Close", command=about_window.destroy)
-        close_button.pack(pady=10)
+        close_button.pack(pady=5)
 
         about_window.grab_set()
         about_window.focus_set()

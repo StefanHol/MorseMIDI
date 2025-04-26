@@ -11,10 +11,11 @@ WINDOWED="-w"
 NAME="-n MorseMIDI"
 ADD_DATA_UI="--add-data=MorseMIDI_Pygubu.ui:."
 ADD_DATA_ICON="--add-data=icon.png:."
+ADD_DATA_LICENSE="--add-data=LICENSE:."
 COLLECT_SUBMODULES="--collect-submodules=pygubu"
 
 # Führe PyInstaller aus
-$PYINSTALLER_CMD $NO_CONFIRM $WINDOWED MorseMIDI.py $NAME $ADD_DATA_UI $ADD_DATA_ICON $COLLECT_SUBMODULES
+$PYINSTALLER_CMD $NO_CONFIRM $WINDOWED MorseMIDI.py $NAME $ADD_DATA_UI $ADD_DATA_ICON $ADD_DATA_LICENSE $COLLECT_SUBMODULES
 
 echo "PyInstaller abgeschlossen. Die ausführbare Datei sollte im Ordner 'dist' liegen."
 

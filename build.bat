@@ -3,7 +3,7 @@ echo Activate venv
 call venv\Scripts\activate.bat
 
 echo Run pyinstaller
-call pyinstaller --noconfirm -w MorseMIDI.py -n MorseMIDI --add-data="MorseMIDI_Pygubu.ui;." --add-data="icon.png;." --collect-submodules pygubu
+call pyinstaller --noconfirm -w MorseMIDI.py -n MorseMIDI --add-data="MorseMIDI_Pygubu.ui;." --add-data="icon.png;." --add-data="LICENSE;." --collect-submodules pygubu
 ::pyinstaller --clean MorseMIDI.spec
 
 echo deactivate venv
