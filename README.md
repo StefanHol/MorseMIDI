@@ -6,9 +6,20 @@ This project was written in Python using the libraries [Tkinter](https://docs.py
 
 ## Modifications:
 - Changed GUI to Pygubu
-- Added functionality to store and load settings or restore to default
-- Edited MIDI code title
-- Output estimation of time ticks that are needed for the MIDI code
+- Input fields instead of sliders
+
+## Features
+- Input fields to change MIDI parameters
+- Input Text to be converted
+- MIDI code title can be changed
+- Calc output estimation of time ticks that are needed for the MIDI code
+- Store and load settings as JSON file
+- Restore to default
+- Selectable themes
+
+## Open ToDos:
+- Store selected theme
+- Check timing calcutaion and output for beats and resolutions
 
 ## Create Virtualenvironment and install requirements
 
